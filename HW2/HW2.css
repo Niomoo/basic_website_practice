@@ -1,0 +1,40 @@
+.container {
+    width: 50%;
+    max-width: 28em;
+    min-width: 25em;
+    text-align: center;
+    margin: 2.5em auto;
+}
+button {
+    margin: 0.5em 0.5em;
+    border: 1px solid;
+    padding: 0 3em;
+    font-size: 1em;
+    line-height: 3em;
+    background-color: rgb(219,219,219);
+    border-color: rgb(182,182,182)
+}
+button:hover {
+    transition: 0.3s;
+    box-shadow: 0.4em 0.4em 0.8em rgba(0, 0, 0, 0.2);
+}
+.btnGray {
+    background-color: rgb(219,219,219);
+    border-color: rgb(182,182,182)
+}
+.btnGray:active {
+    transition: 0.3s;
+    background-color: grey;
+    border-color: grey;
+    color: white;
+}
+.btnGreen {
+    background-color:  rgb(220,242,217);
+    border-color: rgb(186,230,179);
+}
+.btnGreen:active {
+    transition: 0.3s;
+    background-color: green;
+    border-color: green;
+    color: white;
+}
