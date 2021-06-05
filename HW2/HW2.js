@@ -26,7 +26,7 @@ function computing() {
 }
 
 function changeClass() {
-    document.getElementById("btn2").classList.toggle("btnGreen");
+    document.getElementById("btn2").classList.toggle("item");
 }
 
 var n = 5
@@ -38,7 +38,7 @@ function duplicateButton(obj) {
     var newBtn = document.createElement("button");
     newBtn.id = "btn" + n;
     newBtn.innerHTML = "按鈕" + n;
-    newBtn.className = "btnGray";
+    newBtn.className = "item";
     newBtn.addEventListener("click", function() {
         duplicateButton(newBtn);
     })
@@ -52,7 +52,7 @@ function getCoordination() {
     console.log(item);
     
     const rect = item.getBoundingClientRect();
-    const x = window.pageXOffset + rect.left;
-    const y = window.pageYOffset + rect.top;
+    const x = Math.round(window.pageXOffset + rect.left);
+    const y = Math.round(window.pageYOffset + rect.top);
     document.getElementById("btn4").innerHTML = `(${x}, ${y})`;
 }

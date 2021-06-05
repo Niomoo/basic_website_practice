@@ -1,39 +1,41 @@
 .container {
+    margin: 0 auto;
+    margin-top: 3em;
     width: 50%;
-    max-width: 28em;
     min-width: 25em;
-    text-align: center;
-    margin: 2.5em auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em 1em;
 }
-button {
-    margin: 0.5em 0.5em;
+.container > button {
     border: 1px solid;
     padding: 0 3em;
     font-size: 1em;
     line-height: 3em;
+    flex: 1;
+    width: 33.3%;
+    min-width: 33.3%;
+    max-width: 50%;
     background-color: rgb(219,219,219);
-    border-color: rgb(182,182,182)
+    border-color: rgb(182,182,182);
+    transition: 0.3s;
 }
 button:hover {
-    transition: 0.3s;
     box-shadow: 0.4em 0.4em 0.8em rgba(0, 0, 0, 0.2);
 }
-.btnGray {
-    background-color: rgb(219,219,219);
-    border-color: rgb(182,182,182)
-}
-.btnGray:active {
-    transition: 0.3s;
+button:active {
     background-color: grey;
     border-color: grey;
     color: white;
 }
-.btnGreen {
+.container > .item:nth-child(2), .container > .item:nth-child(4) {
     background-color:  rgb(220,242,217);
     border-color: rgb(186,230,179);
+    color: black;
 }
-.btnGreen:active {
-    transition: 0.3s;
+.container > .item:nth-child(2):active,.container > .item:nth-child(4):active{
     background-color: green;
     border-color: green;
     color: white;
