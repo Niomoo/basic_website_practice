@@ -1,3 +1,8 @@
+var btn1 = document.getElementById("btn1");
+var btn2 = document.getElementById("btn2");
+var btn3 = document.getElementById("btn3");
+var btn4 = document.getElementById("btn4");
+
 function computing() {
     var today = new Date();
     yy = today.getFullYear().toString().split('').map(function(item){
@@ -22,11 +27,11 @@ function computing() {
     })
     console.log(a, b, c, a + b + c);
 
-    document.getElementById("btn1").innerHTML = a + b + c;    
+    btn1.innerHTML = a + b + c;    
 }
 
 function changeClass() {
-    document.getElementById("btn2").classList.toggle("item");
+    btn2.classList.toggle("item");
 }
 
 var n = 5
@@ -54,5 +59,10 @@ function getCoordination() {
     const rect = item.getBoundingClientRect();
     const x = Math.round(window.pageXOffset + rect.left);
     const y = Math.round(window.pageYOffset + rect.top);
-    document.getElementById("btn4").innerHTML = `(${x}, ${y})`;
+    btn4.innerHTML = `(${x}, ${y})`;
 }
+
+btn1.addEventListener("click", function() {computing()});
+btn2.addEventListener("click", function() {changeClass()});
+btn3.addEventListener("click", function() {duplicateButton(btn3)});
+btn4.addEventListener("click", function() {getCoordination()});
