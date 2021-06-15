@@ -3,8 +3,8 @@
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
-const width = canvas.width = window.innerWidth;
-const height = canvas.height = window.innerHeight;
+var width = canvas.width = window.innerWidth;
+var height = canvas.height = window.innerHeight;
 
 // function to generate random number
 
@@ -200,3 +200,8 @@ function loop() {
 }
 
 loop();
+
+window.addEventListener('resize', function(e) {
+	width = canvas.width = window.innerWidth;
+	height = canvas.height = window.innerHeight;
+})
