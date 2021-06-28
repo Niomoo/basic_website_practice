@@ -36,19 +36,22 @@ function changeClass() {
 
 var n = 5
 function duplicateButton(obj) {
-    console.log(obj.id);
     var block = document.getElementById("block");
-    obj.disabled = true;
     
-    var newBtn = document.createElement("button");
-    newBtn.id = "btn" + n;
-    newBtn.innerHTML = "按鈕" + n;
-    newBtn.className = "item";
-    newBtn.addEventListener("click", function() {
-        duplicateButton(newBtn);
-    })
-    block.appendChild(newBtn);
-    n++;
+    if(obj.id){ //若存在id屬性
+        var newBtn = document.createElement("button");
+        newBtn.id = "btn" + n;
+        newBtn.innerHTML = "按鈕" + n;
+        newBtn.className = "item";
+        newBtn.addEventListener("click", function() {
+            duplicateButton(newBtn);
+        })
+        block.appendChild(newBtn);
+        n++;
+    }
+
+    obj.removeEventListener("click", function() {duplicateButton(obj)});
+    obj.removeAttribute("id");
 }
 
 function getCoordination() {
