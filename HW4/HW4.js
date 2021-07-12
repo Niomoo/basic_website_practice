@@ -40,3 +40,46 @@
 
 //     svg.appendChild(line);
 // }
+
+const w = 600, h = 400, padding = 30, barMargin = 10;
+
+let dataset = [];
+
+for(let i = 0; i < 5; i++) {
+    let newNum = 5 + Math.round(Math.random() * 5);
+    dataset.push(newNum);
+}
+console.log(dataset);
+
+let yMax = d3.max(dataset, function(d){return d});
+let yMin = d3.min(dataset, function(d){return d});
+
+let xScale = d3.scaleLinear().domain([0, dataset.length]).range([padding, w - padding]);
+let yScale = d3.scaleLinear().domain([yMin, yMax]).range([padding, h - padding]);
+
+let barWidth = (w - padding * 2) / dataset.length - barMargin;
+
+let svg = d3.select('.demo')
+            .append('svg')
+            .attr('width', w)
+            .attr('height', h);
+
+svg.selectAll('rect').data(dataset).enter()
+    .append('rect')
+    .attr('x', function(d, i){return xScale(i)})
+    .attr('y', function(d){return h - yScale(d)})
+    .attr('width', barWidth)
+    .attr('height', function(d){return yScale(d)})
+    .attr('fill', function(d){
+            var color = 0.2 + d * 0.002;
+            return  d3.hsl(200 ,color, color)
+        });
+
+svg.selectAll('text').data(dataset).enter() 
+    .append('text')
+    .text(function(d){ return d})
+    .attr('x', function(d, i){return xScale(i) + barWidth/2})
+    .attr('y', function(d){return h - yScale(d) + 15})
+    .attr('fill', 'white')
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '10px');
