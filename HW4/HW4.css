@@ -1,14 +1,12 @@
-/* #svg {
-    border: 1px solid #000000;
-} */
 .axis path, .axis line{
     fill: none;
-    stroke: SlateGray;
+    stroke: rgb(60, 60, 60);
+    stroke-width: 1.5;
     shape-rendering: crispEdges;
 }
 
 .axis text{
-    font-size: 11px;
+    font-size: 12px;
     fill: rgb(90, 90, 90);
 }
 
