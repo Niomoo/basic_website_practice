@@ -16,7 +16,7 @@ console.table(dataset);
 let xScale = d3.scaleLinear().domain([0, 3 * Math.PI]).range([padding, w - padding]);
 let yScale = d3.scaleLinear().domain([-2, 2]).range([h - padding, padding]);
 
-let svg = d3.select('.demo').append('svg').attr('width', w).attr('height', h);
+let svg = d3.select('.chart').append('svg').attr('width', w).attr('height', h);
 
 let wave = d3.line()
     .x(function(d) { return xScale(d[0]);})
@@ -25,13 +25,13 @@ let wave = d3.line()
 svg.append('path')
     .attr('d', wave(dataset))
     .attr('fill', 'none')
-    .attr("stroke-width", "1.5px")
+    .attr('stroke-width', '1.5px')
     .attr('stroke', 'rgb(82, 78, 181)')
 
 svg.append('path')
     .attr('d', wave(dataset_cos))
     .attr('fill', 'none')
-    .attr("stroke-width", "1.5px")
+    .attr('stroke-width', '1.5px')
     .attr('stroke', 'rgb(105, 151, 175)')
 
 // svg.selectAll('circle').data(dataset).enter()
@@ -103,3 +103,44 @@ svg.append('text')
    .text('Y')
    .attr('font-size', '16px')
    .attr('fill', 'rgb(90, 90, 90');
+
+let legend = d3.select('.legend').append('svg').attr('width', 200).attr('height', 400);
+
+legend.append('rect')
+    .attr('x', 20)
+    .attr('y', 200)
+    .attr('width', 150)
+    .attr('height', 80)
+    .attr('fill', 'none')
+    .attr('stroke', 'rgb(90, 90, 90')
+    .attr('stroke-width', '1px');
+
+legend.append('line')
+    .attr('x1', 40)
+    .attr('y1', 225)
+    .attr('x2', 80)
+    .attr('y2', 225)
+    .attr('stroke', 'rgb(82, 78, 181)')
+    .attr('stroke-width','1.5px')
+
+legend.append('line')
+    .attr('x1', 40)
+    .attr('y1', 255)
+    .attr('x2', 80)
+    .attr('y2', 255)
+    .attr('stroke', 'rgb(105, 151, 175)')
+    .attr('stroke-width','1.5px')
+
+legend.append('text')
+    .attr('x', 90)
+    .attr('y', 230)
+    .text('Sine')
+    .attr('font-size', '14px')
+    .attr('fill', 'rgb(90, 90, 90');
+
+legend.append('text')
+        .attr('x', 90)
+        .attr('y', 260)
+        .text('Cosine')
+        .attr('font-size', '14px')
+        .attr('fill', 'rgb(90, 90, 90');
