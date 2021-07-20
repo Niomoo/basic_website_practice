@@ -1,3 +1,19 @@
 /* #svg {
     border: 1px solid #000000;
 } */
+.axis path, .axis line{
+    fill: none;
+    stroke: SlateGray;
+    shape-rendering: crispEdges;
+}
+
+.axis text{
+    font-size: 11px;
+    fill: rgb(90, 90, 90);
+}
+
+.grid path, .grid line{
+    fill: none;
+    stroke: rgb(184, 184, 184);
+    shape-rendering: crispEdges;
+}

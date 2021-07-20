@@ -1,85 +1,60 @@
-// var svg = document.getElementById("svg");
-// d3.select('body')
-//   .appendChild('svg')
-//   .attr({
-//       'width': 600,
-//       'height': 400,
-//   });
-
-// d3.select('d3')
-//   .appendChild('circle')
-//   .attr({
-//       'cx': 50,
-//       'cy': 50,
-//       'r': 50,
-//       'fill': 'none',
-//       'stroke': '#c00',
-//       'stroke-width': '2px',
-//   });
-
-// var svg = document.getElementById('sine_wave');
-// var origin = { //origin of axes
-//     x: 120,
-//     y: 180
-// };
-// var amplitude = 1; // wave amplitude
-// var rarity = 1; // point spacing
-// var freq = 0.1; // angular frequency
-// var phase = 0; // phase angle
-
-// for (var i = -100; i < 1000; i++) {
-//     var line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-
-//     line.setAttribute('x1', (i - 1) * rarity + origin.x);
-//     line.setAttribute('y1', Math.sin(freq*(i - 1 + phase)) * amplitude + origin.y);
-
-//     line.setAttribute('x2', i * rarity + origin.x);
-//     line.setAttribute('y2', Math.sin(freq*(i + phase)) * amplitude + origin.y);
-
-//     line.setAttribute('style', "stroke:black;stroke-width:1");
-
-//     svg.appendChild(line);
-// }
-
-const w = 600, h = 400, padding = 30, barMargin = 10;
+const w = 600, h = 400, padding = 30;
 
 let dataset = [];
 
-for(let i = 0; i < 5; i++) {
-    let newNum = 5 + Math.round(Math.random() * 5);
-    dataset.push(newNum);
-}
-console.log(dataset);
+let xScale = d3.scaleLinear().domain([0, 5*Math.PI/2]).range([padding, w - padding]);
+let yScale = d3.scaleLinear().domain([-2, 2]).range([h - padding, padding]);
 
-let yMax = d3.max(dataset, function(d){return d});
-let yMin = d3.min(dataset, function(d){return d});
+let svg = d3.select('.demo').append('svg').attr('width', w).attr('height', h);
 
-let xScale = d3.scaleLinear().domain([0, dataset.length]).range([padding, w - padding]);
-let yScale = d3.scaleLinear().domain([yMin, yMax]).range([padding, h - padding]);
-
-let barWidth = (w - padding * 2) / dataset.length - barMargin;
-
-let svg = d3.select('.demo')
-            .append('svg')
-            .attr('width', w)
-            .attr('height', h);
-
-svg.selectAll('rect').data(dataset).enter()
-    .append('rect')
-    .attr('x', function(d, i){return xScale(i)})
-    .attr('y', function(d){return h - yScale(d)})
-    .attr('width', barWidth)
-    .attr('height', function(d){return yScale(d)})
-    .attr('fill', function(d){
-            var color = 0.2 + d * 0.002;
-            return  d3.hsl(200 ,color, color)
-        });
+svg.selectAll('circle').data(dataset).enter()
+    .append('circle')
+    .attr('cx', function(d){return xScale(d[0])})
+    .attr('cy', function(d){return yScale(d[1])})
+    .attr('r', '2px')
+    .attr('fill', 'black');
 
 svg.selectAll('text').data(dataset).enter() 
     .append('text')
-    .text(function(d){ return d})
-    .attr('x', function(d, i){return xScale(i) + barWidth/2})
-    .attr('y', function(d){return h - yScale(d) + 15})
-    .attr('fill', 'white')
-    .attr('text-anchor', 'middle')
+    .text(function(d){ return d[0] + ',' + d[1]})
+    .attr('x', function(d){return xScale(d[0])})
+    .attr('y', function(d){return yScale(d[1])})
+    .attr('fill', 'red')
     .attr('font-size', '10px');
+
+let xAxis = d3.axisBottom(xScale)
+    .ticks(6)
+    .tickValues([0, Math.PI/2, Math.PI, 3*Math.PI/2, 2* Math.PI, 5*Math.PI/2])
+    .tickFormat(function(d){
+        switch (d) {
+            case 0: return 0
+            case Math.PI/2: return 'π/2'
+            case Math.PI: return 'π'
+            case 3 * Math.PI/2: return '3π/2'
+            case 2 * Math.PI: return '2π'
+            case 5 * Math.PI: return '5π/2'
+            default: return
+        }
+    })
+let yAxis = d3.axisLeft(yScale).ticks(5)
+let yAxisR = d3.axisRight(yScale).ticks(5)
+let yGrid = d3.axisRight(yScale)
+    .ticks(5)
+    .tickFormat("")
+    .tickSize((w - 2*padding),0) //左右內縮
+
+svg.append('g').attr('class', 'grid')
+   .attr('transform', 'translate('+ (padding) + ',0)')
+   .call(yGrid)
+
+svg.append('g').attr('class', 'axis')
+   .attr('transform', 'translate(0, '+ (h - padding) + ')')
+   .call(xAxis)
+
+svg.append('g').attr('class', 'axis')
+   .attr('transform', 'translate(' + (w - padding) + ',0)')
+   .call(yAxisR)
+
+svg.append('g').attr('class', 'axis')
+   .attr('transform', 'translate(' + (padding) + ',0)')
+   .call(yAxis)
