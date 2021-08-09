@@ -139,8 +139,8 @@ legend.append('text')
     .attr('fill', 'rgb(90, 90, 90');
 
 legend.append('text')
-        .attr('x', 90)
-        .attr('y', 260)
-        .text('Cosine')
-        .attr('font-size', '14px')
-        .attr('fill', 'rgb(90, 90, 90');
+    .attr('x', 90)
+    .attr('y', 260)
+    .text('Cosine')
+    .attr('font-size', '14px')
+    .attr('fill', 'rgb(90, 90, 90');
