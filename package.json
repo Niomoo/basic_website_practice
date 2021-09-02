@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "d3": "^7.0.0"
+    "d3": "^7.0.0",
+    "svg-path-properties": "^1.0.11"
   }
 }
